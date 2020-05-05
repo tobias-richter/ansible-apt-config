@@ -1,0 +1,10 @@
+# use apt-cacher-ng when defined
+# apt_config_apt_cacher_ng:
+
+apt_config_sources_list_path: /etc/apt/sources.list
+
+# distribution release
+apt_config_distribution_release: "{{ ansible_distribution_release }}"
+
+_apt_config_components_custom: "{{ apt_config_components_custom | default([]) }}"
+apt_config_components: "{{ apt_config_components_default | union(_apt_config_components_custom) }}"

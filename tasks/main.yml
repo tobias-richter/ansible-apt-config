@@ -1,0 +1,38 @@
+- name: Fail when os family is not Debian.
+  fail:
+    msg: "This is not a debian based system ({{ ansible_os_family }})."
+  when: ansible_os_family != 'Debian'
+
+- name: Include distribution specific variables.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "lsb_id_{{ ansible_lsb.id }}.yml"
+    - "distribution_{{ ansible_distribution }}.yml"
+    - "default.yml"
+
+- name: Configure apt-cacher-ng
+  template:
+    src: apt.conf.d/00-apt-cacher-ng.yml
+    dest: /etc/apt/apt.conf.d/00-apt-cacher-ng
+  when: apt_config_apt_cacher_ng is defined
+  tags:
+    - apt-cacher-ng
+
+- name: Configure apt lists and priorities
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: etc/apt/sources.list.j2
+      dest: /etc/apt/sources.list
+    - src: etc/apt/sources.list.d/stable.list.j2
+      dest: /etc/apt/sources.list.d/stable.list
+    - src: etc/apt/preferences.d/stable.pref.j2
+      dest: /etc/apt/preferences.d/stable.pref
+  register: _apt_config_result
+
+- name: Update apt
+  apt:
+    update_cache: yes
+  when: _apt_config_result.changed
+
