@@ -31,7 +31,7 @@
       dest: /etc/apt/preferences.d/stable.pref
   register: _apt_config_result
 
-- name: Update apt
+- name: Update apt # noqa 503
   apt:
     update_cache: yes
   when: _apt_config_result.changed
