@@ -15,6 +15,16 @@
     src: apt.conf.d/00-apt-cacher-ng.yml
     dest: /etc/apt/apt.conf.d/00-apt-cacher-ng
   when: apt_config_apt_cacher_ng is defined
+  register: _apt_cacher_result
+  tags:
+    - apt-cacher-ng
+
+- name: Delete apt-cacher-ng.
+  file:
+    path: /etc/apt/apt.conf.d/00-apt-cacher-ng
+    state: absent
+  when: apt_config_apt_cacher_ng is not defined
+  register: _apt_cacher_result
   tags:
     - apt-cacher-ng
 
@@ -34,5 +44,5 @@
 - name: Update apt # noqa 503
   apt:
     update_cache: yes
-  when: _apt_config_result.changed
+  when: _apt_config_result.changed or _apt_cacher_result.changed
 
