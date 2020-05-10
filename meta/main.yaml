@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: users
   author: Tobias Richter
-  description: Ansible Role for managing configuring APT.
+  description: Ansible Role for configuring APT.
   license: Apache
   min_ansible_version: 2.7
 
