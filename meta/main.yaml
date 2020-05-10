@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: users
+  role_name: apt_config
   author: Tobias Richter
   description: Ansible Role for configuring APT.
   license: Apache
