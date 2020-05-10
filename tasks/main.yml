@@ -45,4 +45,3 @@
   apt:
     update_cache: yes
   when: _apt_config_result.changed or _apt_cacher_result.changed
-
