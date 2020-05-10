@@ -8,7 +8,7 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-      - any
+      - all
   - name: Ubuntu
     versions:
-      - any
+      - all
