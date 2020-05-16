@@ -1,1 +1,2 @@
 Acquire::http::Proxy "{{ apt_config_apt_cacher_ng }}";
+Acquire::https::Proxy "{{ apt_config_apt_cacher_ng }}";
