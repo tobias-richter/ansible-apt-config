@@ -1,9 +1,10 @@
+# Raspbian debs
 apt_config_debs:
   - uri: http://raspbian.raspberrypi.org/raspbian
     suite: "{{ apt_config_distribution_release }}"
 
+# Raspbian components
 apt_config_components_default:
   - main
   - contrib
   - non-free
-#  - rpimain

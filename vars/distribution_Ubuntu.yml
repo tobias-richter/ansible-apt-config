@@ -1,3 +1,4 @@
+# Ubuntu debs
 apt_config_debs:
   - uri: http://archive.ubuntu.com/ubuntu
     suite: "{{ apt_config_distribution_release }}"
@@ -8,6 +9,7 @@ apt_config_debs:
   - uri: http://archive.ubuntu.com/ubuntu
     suite: "{{ apt_config_distribution_release }}-backports"
 
+# Default ubuntu components
 apt_config_components_default:
   - main
   - restricted
