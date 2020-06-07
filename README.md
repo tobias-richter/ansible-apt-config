@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tobias-richter/ansible-apt-config.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-apt-config)
 
-This roles configures apt sources, preferences and apt-cacher-ng / proxy for Debian and Ubuntu.
+This role configures apt sources, preferences and apt-cacher-ng / proxy for Debian and Ubuntu.
 
 ## Requirements
 
