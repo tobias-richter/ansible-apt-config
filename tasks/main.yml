@@ -14,6 +14,7 @@
   template:
     src: apt.conf.d/00-apt-cacher-ng.yml
     dest: /etc/apt/apt.conf.d/00-apt-cacher-ng
+    mode: 0644
   when: apt_config_apt_cacher_ng is defined
   register: _apt_cacher_result
   tags:
@@ -32,6 +33,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: 0644
   with_items:
     - src: etc/apt/sources.list.j2
       dest: /etc/apt/sources.list
