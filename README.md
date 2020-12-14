@@ -1,6 +1,6 @@
 # tobias_richter.apt_config
 
-[![Build Status](https://travis-ci.org/tobias-richter/ansible-apt-config.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-apt-config)
+[![Build Status](https://github.com/tobias-richter/ansible-apt-config/workflows/CI/badge.svg)](https://github.com/tobias-richter/ansible-apt-config/actions)
 
 This role configures apt sources, preferences and apt-cacher-ng / proxy for Debian and Ubuntu.
 
