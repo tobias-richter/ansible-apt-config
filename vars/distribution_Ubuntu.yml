@@ -1,3 +1,4 @@
+---
 # Ubuntu debs
 apt_config_debs:
   - uri: http://archive.ubuntu.com/ubuntu

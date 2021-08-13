@@ -1,3 +1,4 @@
+---
 # configure apt-cacher-ng when defined
 # apt_config_apt_cacher_ng:
 # configure repos that will be directly accessed without using apt_cacher_ng or other proxy

@@ -1,3 +1,4 @@
+---
 - name: Fail when os family is not Debian.
   fail:
     msg: "This is not a debian based system ({{ ansible_os_family }})."
