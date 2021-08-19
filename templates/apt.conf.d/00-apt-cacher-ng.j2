@@ -1,4 +1,3 @@
----
 Acquire::http::Proxy "{{ apt_config_apt_cacher_ng }}";
 Acquire::https::Proxy "{{ apt_config_apt_cacher_ng }}";
 {% for direct_http_repo in apt_config_http_proxy_direct_repos %}
