@@ -21,4 +21,4 @@ This playbook configures apt together with a proxy server / apt-cacher-ng.
     - hosts: apt_config
 	  roles:
 	    - role: tobias_richter.apt_config
-	      apt_config_apt_cacher_ng: http://apt-cacher-ng.main.corp
+	      apt_config_http_proxy: http://apt-cacher-ng.main.corp
