@@ -8,6 +8,7 @@
   include_vars: "{{ item }}"
   with_first_found:
     - "lsb_id_{{ ansible_lsb.id }}.yml"
+    - "distribution_{{ ansible_distribution }}_{{ ansible_lsb.major_release }}.yml"
     - "distribution_{{ ansible_distribution }}.yml"
     - "default.yml"
 

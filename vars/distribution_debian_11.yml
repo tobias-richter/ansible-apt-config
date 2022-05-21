@@ -1,0 +1,16 @@
+---
+# default debs to configure
+apt_config_debs:
+  - uri: http://ftp.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}"
+  - uri: http://ftp.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}-updates"
+  - uri: http://security.debian.org
+    suite: "{{ apt_config_distribution_release }}-security"
+  - uri: http://ftp.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}-backports"
+
+# default components
+apt_config_components_default:
+  - main
+  - contrib
