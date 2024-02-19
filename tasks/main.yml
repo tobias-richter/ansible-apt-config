@@ -4,12 +4,24 @@
     msg: "This is not a debian based system ({{ ansible_os_family }})."
   when: ansible_os_family != 'Debian'
 
+- debug:
+    var: ansible_lsb
+
+- debug:
+    var: ansible_distribution
+
+#- debug:
+#    var: ansible_facts
+
+- debug:
+    var: ansible_distribution_release
+
 - name: Include distribution specific variables.
   include_vars: "{{ item }}"
   with_first_found:
-    - "lsb_id_{{ ansible_lsb.id }}.yml"
-    - "distribution_{{ ansible_distribution }}_{{ ansible_lsb.major_release }}.yml"
-    - "distribution_{{ ansible_distribution }}.yml"
+    - "lsb_id_{{ ansible_lsb.id | lower }}.yml"
+    - "distribution_{{ ansible_distribution | lower }}_{{ ansible_lsb.major_release }}.yml"
+    - "distribution_{{ ansible_distribution | lower }}.yml"
     - "default.yml"
 
 - name: Configure proxy.
