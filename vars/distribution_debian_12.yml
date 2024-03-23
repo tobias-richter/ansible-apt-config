@@ -1,14 +1,17 @@
 ---
 # default debs to configure
-apt_config_debs:
-  - uri: http://ftp.debian.org/debian
-    suite: "{{ apt_config_distribution_release }}"
-  - uri: http://ftp.debian.org/debian
-    suite: "{{ apt_config_distribution_release }}-updates"
-  - uri: http://security.debian.org/debian-security
-    suite: "{{ apt_config_distribution_release }}-security"
-  - uri: http://ftp.debian.org/debian
-    suite: "{{ apt_config_distribution_release }}-backports"
+apt_config_debs: []
+#  - uri: http://ftp.debian.org/debian
+#    suite: "{{ apt_config_distribution_release }}"
+#  - uri: http://ftp.debian.org/debian
+#    suite: "{{ apt_config_distribution_release }}-updates"
+#  - uri: http://security.debian.org/debian-security
+#    suite: "{{ apt_config_distribution_release }}-security"
+#  - uri: http://ftp.debian.org/debian
+#    suite: "{{ apt_config_distribution_release }}-backports"
+
+apt_config_sources: no
+apt_config_preferences: no
 
 # default components
 apt_config_components_default:
