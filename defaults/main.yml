@@ -23,3 +23,9 @@ apt_config_components_custom: []
 # - rpimain
 
 apt_config_components: "{{ apt_config_components_default | union(apt_config_components_custom) }}"
+
+# configure preferences
+apt_config_preferences: yes
+
+# configure sources
+apt_config_sources: yes

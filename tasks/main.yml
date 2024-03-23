@@ -50,7 +50,7 @@
     path: /etc/apt/apt.conf.d/00apt-cacher-ng
     state: absent
 
-- name: Configure apt lists and priorities
+- name: Configure apt lists
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -60,11 +60,40 @@
       dest: /etc/apt/sources.list
     - src: etc/apt/sources.list.d/stable.list.j2
       dest: /etc/apt/sources.list.d/stable.list
+  when: apt_config_sources
+  register: _apt_config_sources_add_result
+
+- name: Remove apt lists
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/stable.list
+    state: absent
+  when: not apt_config_sources
+  register: _apt_config_sources_remove_result
+
+- name: Configure apt preferences
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  with_items:
     - src: etc/apt/preferences.d/stable.pref.j2
       dest: /etc/apt/preferences.d/stable.pref
-  register: _apt_config_result
+  when: apt_config_preferences
+  register: _apt_config_preferences_add_result
+
+- name: Remove apt preferences
+  ansible.builtin.file:
+    path: /etc/apt/preferences.d/stable.pref
+    state: absent
+  when: not apt_config_preferences
+  register: _apt_config_preferences_remove_result
 
 - name: Update apt  # noqa 503
   apt:
     update_cache: yes
-  when: _apt_config_result.changed or _apt_proxy_result.changed
+  when: > 
+    _apt_config_sources_add_result.changed or 
+    _apt_config_sources_remove_result.changed or 
+    _apt_config_preferences_add_result.changed or 
+    _apt_config_preferences_remove_result.changed or
+    _apt_proxy_result.changed
