@@ -7,7 +7,7 @@ apt_config_debs:
     suite: "{{ apt_config_distribution_release }}-updates"
   - uri: http://security.debian.org
     suite: "{{ apt_config_distribution_release }}-security"
-  - uri: http://ftp.debian.org/debian
+  - uri: http://archive.debian.org/debian
     suite: "{{ apt_config_distribution_release }}-backports"
 
 # default components
