@@ -1,0 +1,23 @@
+---
+# default debs to configure
+apt_config_debs:
+  - uri: http://deb.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}"
+    options: "[arch=amd64 signed_by=/usr/share/keyrings/debian-archive-keyring.gpg]"
+  - uri: http://deb.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}-updates"
+    options: "[arch=amd64 signed_by=/usr/share/keyrings/debian-archive-keyring.gpg]"
+  - uri: http://security.debian.org
+    suite: "{{ apt_config_distribution_release }}-security"
+    options: "[arch=amd64 signed_by=/usr/share/keyrings/debian-archive-keyring.gpg]"
+  - uri: http://ftp.debian.org/debian
+    suite: "{{ apt_config_distribution_release }}-backports"
+    options: "[arch=amd64 signed_by=/usr/share/keyrings/debian-archive-keyring.gpg]"
+
+apt_config_sources: yes
+apt_config_preferences: no
+
+# default components
+apt_config_components_default:
+  - main
+  - contrib

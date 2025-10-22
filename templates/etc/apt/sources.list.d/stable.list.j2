@@ -1,7 +1,7 @@
 # {{ ansible_managed }} by tobias_richter.apt_config
 
 {% for apt_config_deb in apt_config_debs %}
-deb {{ apt_config_deb.uri }} {{ apt_config_deb.suite }} {{ apt_config_components | join(' ') }}
+deb {{ apt_config_deb.options | default('') }} {{ apt_config_deb.uri }} {{ apt_config_deb.suite }} {{ apt_config_components | join(' ') }}
 
 {% endfor %}
 
