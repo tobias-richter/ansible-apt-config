@@ -1,0 +1,19 @@
+- name: Configure apt source lists
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  with_items:
+    - src: etc/apt/sources.list.j2
+      dest: /etc/apt/sources.list
+    - src: etc/apt/sources.list.d/stable.list.j2
+      dest: /etc/apt/sources.list.d/stable.list
+  when: apt_config_sources
+  register: _apt_config_sources_add_result
+
+- name: Remove apt source lists
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/stable.list
+    state: absent
+  when: not apt_config_sources
+  register: _apt_config_sources_remove_result

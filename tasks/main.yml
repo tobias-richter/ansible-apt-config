@@ -50,25 +50,21 @@
     path: /etc/apt/apt.conf.d/00apt-cacher-ng
     state: absent
 
-- name: Configure apt lists
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    mode: 0644
-  with_items:
-    - src: etc/apt/sources.list.j2
-      dest: /etc/apt/sources.list
-    - src: etc/apt/sources.list.d/stable.list.j2
-      dest: /etc/apt/sources.list.d/stable.list
-  when: apt_config_sources
-  register: _apt_config_sources_add_result
+- name: Configure debian sources.
+  include_tasks: configure_debian_sources.yaml
+  when: apt_config_debian_sources is defined
 
-- name: Remove apt lists
+- name: Remove debian.sources
   ansible.builtin.file:
-    path: /etc/apt/sources.list.d/stable.list
+    path: "{{ apt_config_debian_sources_path }}"
     state: absent
-  when: not apt_config_sources
+  when: apt_config_debian_sources is not defined
   register: _apt_config_sources_remove_result
+
+# legacy format
+- name: Configure sources list.
+  include_tasks: configure_sources_lists.yaml
+  when: apt_config_debian_sources is not defined
 
 - name: Configure apt preferences
   template:

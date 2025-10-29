@@ -1,0 +1,11 @@
+# Ansible managed by tobias_richter.apt_config
+
+{% for apt_config_debian_source in apt_config_debian_sources %}
+Types: {{ apt_config_debian_source.types | mandatory | sort | join(" ") }}
+URIs: {{ apt_config_debian_source.uris | mandatory | sort | join(" ") }}
+Suites: {{ apt_config_debian_source.suites | mandatory | sort | join(" ") }}
+Components: {{ apt_config_debian_source.components | mandatory | sort | join(" ") }}
+Signed-By: {{ apt_config_debian_source.signed_by | mandatory }}
+
+{% endfor %}
+
