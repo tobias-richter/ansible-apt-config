@@ -13,5 +13,8 @@
 
 - name: Delete legacy sources.list
   ansible.builtin.file:
-    path: /etc/apt/sources.list.d/stable.list
+    path:
     state: absent
+  with_items:
+    - /etc/apt/sources.list.d/stable.list
+    - /etc/apt/sources.list.d/stable.sources

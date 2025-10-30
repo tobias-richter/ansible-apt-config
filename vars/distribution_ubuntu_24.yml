@@ -1,0 +1,40 @@
+---
+# Ubuntu debs
+apt_config_debs:
+  - uri: http://archive.ubuntu.com/ubuntu
+    suite: "{{ apt_config_distribution_release }}"
+  - uri: http://archive.ubuntu.com/ubuntu
+    suite: "{{ apt_config_distribution_release }}-updates"
+  - uri: http://archive.ubuntu.com/ubuntu
+    suite: "{{ apt_config_distribution_release }}-security"
+  - uri: http://archive.ubuntu.com/ubuntu
+    suite: "{{ apt_config_distribution_release }}-backports"
+
+apt_config_debian_sources:
+  - types:
+      - deb
+    uris:
+      - http://archive.ubuntu.com/ubuntu
+    suites:
+      - noble
+      - noble-updates
+      - noble-backports
+    components: "{{ apt_config_components }}"
+    signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+  - types:
+      - deb
+    uris:
+      - http://security.ubuntu.com/ubuntu
+    suites:
+      - noble-security
+    components: "{{ apt_config_components }}"
+    signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+
+# Default ubuntu components
+apt_config_components_default:
+  - main
+  - restricted
+  - universe
+  - multiverse
