@@ -1,3 +1,4 @@
+---
 - name: Configure debian.sources
   ansible.builtin.template:
     src: "{{ item.src }}"

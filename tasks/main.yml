@@ -1,21 +1,21 @@
 ---
 - name: Fail when os family is not Debian.
-  fail:
+  ansible.builtin.fail:
     msg: "This is not a debian based system ({{ ansible_os_family }})."
   when: ansible_os_family != 'Debian'
 
 - name: "Log ansible_distribution."
-  debug:
+  ansible.builtin.debug:
     var: ansible_distribution
     verbosity: 1
 
 - name: "Log ansible_distribution_major_version."
-  debug:
+  ansible.builtin.debug:
     var: ansible_distribution_major_version
     verbosity: 1
 
 - name: "Log ansible_distribution_release."
-  debug:
+  ansible.builtin.debug:
     var: ansible_distribution_release
     verbosity: 1
 
@@ -28,7 +28,7 @@
     - "default.yml"
 
 - name: Configure proxy.
-  template:
+  ansible.builtin.template:
     src: apt.conf.d/00proxy.j2
     dest: /etc/apt/apt.conf.d/00proxy
     mode: 0644
@@ -38,7 +38,7 @@
     - apt-cacher-ng
 
 - name: Delete proxy config.
-  file:
+  ansible.builtin.file:
     path: /etc/apt/apt.conf.d/00proxy
     state: absent
   when:
@@ -46,12 +46,12 @@
     - apt_config_https_proxy is not defined
 
 - name: Delete old apt-cacher-ng.
-  file:
+  ansible.builtin.file:
     path: /etc/apt/apt.conf.d/00apt-cacher-ng
     state: absent
 
 - name: Configure debian sources.
-  include_tasks: configure_debian_sources.yaml
+  ansible.builtin.include_tasks: configure_debian_sources.yaml
   when: apt_config_debian_sources is defined
 
 - name: Remove debian.sources
@@ -63,11 +63,11 @@
 
 # legacy format
 - name: Configure sources list.
-  include_tasks: configure_sources_lists.yaml
+  ansible.builtin.include_tasks: configure_sources_lists.yaml
   when: apt_config_debian_sources is not defined
 
 - name: Configure apt preferences
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: 0644
@@ -85,11 +85,11 @@
   register: _apt_config_preferences_remove_result
 
 - name: Update apt  # noqa 503
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
   when: > 
-    _apt_config_sources_add_result.changed or 
-    _apt_config_sources_remove_result.changed or 
-    _apt_config_preferences_add_result.changed or 
+    _apt_config_sources_add_result.changed or
+    _apt_config_sources_remove_result.changed or
+    _apt_config_preferences_add_result.changed or
     _apt_config_preferences_remove_result.changed or
     _apt_proxy_result.changed
