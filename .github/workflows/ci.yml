@@ -39,7 +39,7 @@ jobs:
         run: "printf '[defaults]\nroles_path=./tests/requirements/:../' > ansible.cfg"
 
       - name: ansible-lint
-        uses: ansible/ansible-lint@main
+        uses: ansible/ansible-lint@v25.9.2
 
       - name: ansible-playbook syntax check
         uses: dawidd6/action-ansible-playbook@3c534b3ba0bcbbee2b13fb45226f71acbaca2a76
