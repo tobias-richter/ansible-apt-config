@@ -20,7 +20,7 @@
     verbosity: 1
 
 - name: Include distribution specific variables.
-  include_vars: "{{ item }}"
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "lsb_id_{{ ansible_lsb.id | lower }}.yml"
     - "distribution_{{ ansible_distribution | lower }}_{{ ansible_distribution_major_version }}.yml"
@@ -84,10 +84,10 @@
   when: not apt_config_preferences
   register: _apt_config_preferences_remove_result
 
-- name: Update apt  # noqa 503
+- name: Update apt  # noqa no-handler
   ansible.builtin.apt:
     update_cache: yes
-  when: > 
+  when: >
     _apt_config_sources_add_result.changed or
     _apt_config_sources_remove_result.changed or
     _apt_config_preferences_add_result.changed or
