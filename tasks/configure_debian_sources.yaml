@@ -1,0 +1,20 @@
+- name: Configure debian.sources
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - src: etc/apt/sources.list.d/debian.sources.j2
+      dest: "{{ apt_config_debian_sources_path }}"
+  when: apt_config_debian_sources
+  register: _apt_config_sources_add_result
+
+- name: Delete legacy sources.list
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/apt/sources.list.d/stable.list
+    - /etc/apt/sources.list.d/stable.sources

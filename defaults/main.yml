@@ -13,6 +13,8 @@ apt_config_https_proxy_direct_repos: []
 
 # Path to sources.list
 apt_config_sources_list_path: /etc/apt/sources.list
+# Path to debian.sources / ubuntu.sources
+apt_config_debian_sources_path: "/etc/apt/sources.list.d/{{ ansible_distribution | lower }}.sources"
 
 # distribution release
 apt_config_distribution_release: "{{ ansible_distribution_release }}"
