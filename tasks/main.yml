@@ -4,18 +4,18 @@
     msg: "This is not a debian based system ({{ ansible_os_family }})."
   when: ansible_os_family != 'Debian'
 
-- debug:
+- name: "Log ansible_distribution."
+  debug:
     var: ansible_distribution
     verbosity: 1
 
-- debug:
+- name: "Log ansible_distribution_major_version."
+  debug:
     var: ansible_distribution_major_version
     verbosity: 1
 
-#- debug:
-#    var: ansible_facts
-
-- debug:
+- name: "Log ansible_distribution_release."
+  debug:
     var: ansible_distribution_release
     verbosity: 1
 
