@@ -2,4 +2,4 @@
 - name: Test role syntax
   hosts: test
   roles:
-    - tobias_richter.apt_config
+    - ansible-apt-config
