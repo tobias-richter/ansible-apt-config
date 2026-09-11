@@ -1,3 +1,4 @@
 .idea
 *.pyc
 .venv
+.ansible/roles/tobias_richter.apt_config
