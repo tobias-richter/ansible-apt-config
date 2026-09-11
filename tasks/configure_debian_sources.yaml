@@ -9,7 +9,7 @@
   with_items:
     - src: etc/apt/sources.list.d/debian.sources.j2
       dest: "{{ apt_config_debian_sources_path }}"
-  when: apt_config_debian_sources
+  when: apt_config_debian_sources is defined
   register: _apt_config_sources_add_result
 
 - name: Delete legacy sources.list
